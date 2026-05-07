@@ -583,7 +583,6 @@ export const SAMPLE_SONGS: Song[] = [
       { id: 's6-outro',   type: 'outro',  label: 'Outro',   lines: [s6_outro] },
     ],
   },
-  ,
   // ── 더 원합니다 ──────────────────────────────────────────────────────
   {
     id: 'song-7',
