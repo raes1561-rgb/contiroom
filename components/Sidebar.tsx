@@ -1,6 +1,9 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import type { Song } from '@/types/song';
+import type { Setlist } from '@/types/setlist';
+import { getAllSetlists, formatDate } from '@/lib/setlistStorage';
 
 export type AppView = 'home' | 'leadsheet' | 'setlist';
 
@@ -11,6 +14,9 @@ interface SidebarProps {
   selectedSongId?: string;
   onSelectSong: (songId: string) => void;
   setlistCount: number;
+  activeSetlistId?: string;
+  onOpenSetlist: (setlist: Setlist) => void;
+  setlistRefreshKey?: number;
 }
 
 function Logo() {
@@ -57,8 +63,16 @@ const NAV = [
 ];
 
 export default function Sidebar({
-  currentView, onNavigate, songs, selectedSongId, onSelectSong, setlistCount,
+  currentView, onNavigate, songs, selectedSongId, onSelectSong,
+  setlistCount, activeSetlistId, onOpenSetlist, setlistRefreshKey = 0,
 }: SidebarProps) {
+  const [setlists, setSetlists] = useState<Setlist[]>([]);
+  const [setlistExpanded, setSetlistExpanded] = useState(true);
+
+  useEffect(() => {
+    setSetlists(getAllSetlists());
+  }, [setlistRefreshKey, currentView]);
+
   return (
     <aside className="flex h-screen w-[220px] shrink-0 flex-col border-r border-neutral-200 bg-white">
       {/* Brand */}
@@ -81,38 +95,90 @@ export default function Sidebar({
           const active = currentView === view;
           const badge = view === 'setlist' && setlistCount > 0 ? setlistCount : null;
           return (
-            <button
-              key={view}
-              type="button"
-              onClick={() => onNavigate(view)}
-              className={[
-                'group mb-0.5 flex w-full items-center justify-between gap-2.5 rounded-lg px-3 py-2 text-left text-[13.5px] font-medium transition',
-                active
-                  ? 'bg-neutral-900 text-white'
-                  : 'text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900',
-              ].join(' ')}
-            >
-              <span className="flex items-center gap-2.5">
-                <span className={active ? 'text-white' : 'text-neutral-400 group-hover:text-neutral-600'}>
-                  {icon}
+            <div key={view}>
+              <button
+                type="button"
+                onClick={() => {
+                  onNavigate(view);
+                  if (view === 'setlist') setSetlistExpanded(true);
+                }}
+                className={[
+                  'group mb-0.5 flex w-full items-center justify-between gap-2.5 rounded-lg px-3 py-2 text-left text-[13.5px] font-medium transition',
+                  active
+                    ? 'bg-neutral-900 text-white'
+                    : 'text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900',
+                ].join(' ')}
+              >
+                <span className="flex items-center gap-2.5">
+                  <span className={active ? 'text-white' : 'text-neutral-400 group-hover:text-neutral-600'}>
+                    {icon}
+                  </span>
+                  {label}
                 </span>
-                {label}
-              </span>
-              {badge && (
-                <span className={[
-                  'rounded-full px-1.5 py-0.5 text-[10px] font-bold leading-none',
-                  active ? 'bg-white/20 text-white' : 'bg-neutral-200 text-neutral-600',
-                ].join(' ')}>
-                  {badge}
+                <span className="flex items-center gap-1">
+                  {badge && (
+                    <span className={[
+                      'rounded-full px-1.5 py-0.5 text-[10px] font-bold leading-none',
+                      active ? 'bg-white/20 text-white' : 'bg-neutral-200 text-neutral-600',
+                    ].join(' ')}>
+                      {badge}
+                    </span>
+                  )}
+                  {/* 콘티 펼치기/접기 화살표 */}
+                  {view === 'setlist' && setlists.length > 0 && (
+                    <span
+                      className={[
+                        'text-[10px] transition-transform',
+                        active ? 'text-white/60' : 'text-neutral-400',
+                        setlistExpanded ? 'rotate-90' : '',
+                      ].join(' ')}
+                      onClick={(e) => { e.stopPropagation(); setSetlistExpanded((v) => !v); }}
+                    >
+                      ▶
+                    </span>
+                  )}
                 </span>
+              </button>
+
+              {/* 콘티 하위 목록 */}
+              {view === 'setlist' && setlistExpanded && setlists.length > 0 && (
+                <div className="ml-3 mb-1 border-l border-neutral-200 pl-3">
+                  {setlists.map((sl) => {
+                    const isActive = sl.meta.id === activeSetlistId;
+                    return (
+                      <button
+                        key={sl.meta.id}
+                        type="button"
+                        onClick={() => onOpenSetlist(sl)}
+                        className={[
+                          'group flex w-full flex-col rounded-md px-2 py-1.5 text-left transition',
+                          isActive
+                            ? 'bg-indigo-50 text-indigo-700'
+                            : 'text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900',
+                        ].join(' ')}
+                      >
+                        <span className="truncate text-[12px] font-semibold leading-tight">
+                          {sl.meta.title}
+                        </span>
+                        <span className={[
+                          'text-[10px]',
+                          isActive ? 'text-indigo-400' : 'text-neutral-400',
+                        ].join(' ')}>
+                          {formatDate(sl.meta.date)}
+                          {sl.meta.service && ` · ${sl.meta.service}`}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
               )}
-            </button>
+            </div>
           );
         })}
       </nav>
 
       {/* Library */}
-      <div className="mt-5 flex min-h-0 flex-1 flex-col px-3">
+      <div className="mt-4 flex min-h-0 flex-1 flex-col px-3">
         <div className="mb-2 flex items-center justify-between px-3">
           <span className="text-[10px] font-semibold uppercase tracking-[0.16em] text-neutral-400">
             Library
@@ -147,7 +213,7 @@ export default function Sidebar({
         </div>
       </div>
 
-      {/* Footer actions */}
+      {/* Footer */}
       <div className="border-t border-neutral-100 px-3 py-3">
         {[
           { label: 'Upload Sheet', icon: '↑' },

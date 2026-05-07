@@ -32,6 +32,7 @@ export default function App() {
   const [paperSize, setPaperSize]       = useState<PaperSize>('a4-portrait');
   const [slideshow, setSlideshow]       = useState<SlideshowState | null>(null);
   const [activeSetlist, setActiveSetlist] = useState<Setlist | null>(null);
+  const [setlistRefreshKey, setSetlistRefreshKey] = useState(0);
   const [setlistItems, setSetlistItems]   = useState<SetlistItem[]>([]);
 
   const songs = useMemo<Song[]>(() =>
@@ -70,12 +71,14 @@ export default function App() {
   function handleCreateSetlist(sl: Setlist) {
     setActiveSetlist(sl);
     setSetlistItems([]);
+    setSetlistRefreshKey((k) => k + 1);
     setView('setlist');
   }
 
   function handleOpenSetlist(sl: Setlist) {
     setActiveSetlist(sl);
     setSetlistItems(sl.items);
+    setSetlistRefreshKey((k) => k + 1);
     setView('setlist');
   }
 
@@ -156,6 +159,9 @@ export default function App() {
         selectedSongId={selectedSongId}
         onSelectSong={handleSelectSong}
         setlistCount={setlistItems.length}
+        activeSetlistId={activeSetlist?.meta.id}
+        onOpenSetlist={handleOpenSetlist}
+        setlistRefreshKey={setlistRefreshKey}
       />
 
       <div className="min-w-0 flex-1">

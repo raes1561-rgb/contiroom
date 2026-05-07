@@ -110,12 +110,11 @@ export default function HomeScreen({
             <>
               {/* Headline */}
               <div className="mb-10 text-center">
-                <h1 className="text-[40px] font-bold leading-[1.15] tracking-tight text-neutral-900">
-                  찬양 악보,<br />한 곳에서
+                <h1 className="text-[38px] font-bold leading-tight tracking-tight text-neutral-900">
+                  찬양팀의 모든 악보, 콘티를 한 곳에서
                 </h1>
-                <p className="mt-4 text-[17px] leading-relaxed text-neutral-500">
-                  악보를 검색하고, 키를 바꾸고,<br />
-                  콘티를 한 장에 담아보세요
+                <p className="mt-3 text-[16px] text-neutral-500">
+                  악보를 검색하고, 키를 바꾸고, 콘티를 한 장에 담아보세요
                 </p>
               </div>
 
@@ -181,7 +180,7 @@ export default function HomeScreen({
                   title="콘티 만들기"
                   desc="여러 곡을 한 장에 자동으로 배치해요"
                   label="콘티 시작"
-                  variant="dark"
+                  variant="indigo"
                   onClick={() => setShowModal(true)}
                 />
                 <FeatureCard
@@ -271,29 +270,32 @@ interface FeatureCardProps {
   title: string;
   desc: string;
   label: string;
-  variant: 'light' | 'dark' | 'amber';
+  variant: 'light' | 'dark' | 'amber' | 'indigo';
   onClick: () => void;
 }
 
 function FeatureCard({ icon, title, desc, label, variant, onClick }: FeatureCardProps) {
   const dark = variant === 'dark';
   const amber = variant === 'amber';
+  const indigo = variant === 'indigo';
   return (
     <button
       type="button"
       onClick={onClick}
       className={[
         'group flex flex-col items-start gap-3 rounded-2xl border p-5 text-left transition-all duration-200',
-        dark  ? 'border-neutral-900 bg-neutral-900 text-white hover:bg-neutral-800' :
-        amber ? 'border-amber-200 bg-amber-50 text-neutral-900 hover:border-amber-300 hover:bg-amber-100' :
-                'border-neutral-200 bg-white text-neutral-900 hover:border-neutral-300 hover:shadow-[0_8px_32px_-8px_rgba(0,0,0,0.10)]',
+        dark   ? 'border-neutral-900 bg-neutral-900 text-white hover:bg-neutral-800' :
+        indigo ? 'border-indigo-200 bg-indigo-50 text-neutral-900 hover:border-indigo-300 hover:bg-indigo-100' :
+        amber  ? 'border-amber-200 bg-amber-50 text-neutral-900 hover:border-amber-300 hover:bg-amber-100' :
+                 'border-neutral-200 bg-white text-neutral-900 hover:border-neutral-300 hover:shadow-[0_8px_32px_-8px_rgba(0,0,0,0.10)]',
       ].join(' ')}
     >
       <div className={[
         'flex h-10 w-10 items-center justify-center rounded-xl',
-        dark  ? 'bg-white/10 text-indigo-300' :
-        amber ? 'bg-amber-100 text-amber-600' :
-                'bg-indigo-50 text-indigo-600',
+        dark   ? 'bg-white/10 text-indigo-300' :
+        indigo ? 'bg-indigo-100 text-indigo-600' :
+        amber  ? 'bg-amber-100 text-amber-600' :
+                 'bg-indigo-50 text-indigo-600',
       ].join(' ')}>
         {icon}
       </div>
@@ -305,9 +307,10 @@ function FeatureCard({ icon, title, desc, label, variant, onClick }: FeatureCard
       </div>
       <div className={[
         'flex items-center gap-1.5 text-[13px] font-semibold',
-        dark  ? 'text-indigo-300' :
-        amber ? 'text-amber-700' :
-                'text-indigo-600',
+        dark   ? 'text-indigo-300' :
+        indigo ? 'text-indigo-700' :
+        amber  ? 'text-amber-700' :
+                 'text-indigo-600',
       ].join(' ')}>
         {label} →
       </div>
