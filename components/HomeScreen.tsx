@@ -131,62 +131,68 @@ export default function HomeScreen({
                 {songs.length}곡 등록 · 한 글자씩 칠 때마다 결과가 바로 나와요
               </p>
 
-              {/* Quick picks */}
-              <div className="mt-8 flex flex-wrap justify-center gap-2">
-                {songs.slice(0, 6).map((song) => (
-                  <button
-                    key={song.id}
-                    type="button"
-                    onClick={() => onSelectSong(song.id)}
-                    className="group flex items-center gap-2 rounded-full border border-neutral-200 bg-white px-3.5 py-1.5 text-sm text-neutral-700 shadow-sm transition hover:border-neutral-800 hover:bg-neutral-900 hover:text-white hover:shadow-none"
-                  >
-                    <span className="font-medium">{song.title}</span>
-                    <span className="rounded-sm bg-neutral-100 px-1.5 py-0.5 text-[10px] font-bold tracking-wider text-neutral-500 group-hover:bg-white/15 group-hover:text-white/80">
-                      {song.originalKey}
-                    </span>
-                  </button>
-                ))}
+              {/* 인기 찬양 리스트 */}
+              <div className="mt-8">
+                <div className="mb-3 flex items-center justify-between">
+                  <h3 className="text-[13px] font-bold text-neutral-700">🔥 인기 찬양 리스트</h3>
+                  <span className="text-[11px] text-neutral-400">{songs.length}곡</span>
+                </div>
+                <div className="grid grid-cols-2 gap-2">
+                  {songs.map((song, i) => (
+                    <button
+                      key={song.id}
+                      type="button"
+                      onClick={() => onSelectSong(song.id)}
+                      className="group flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-3.5 py-2.5 text-left shadow-sm transition hover:border-neutral-800 hover:bg-neutral-900 hover:shadow-none"
+                    >
+                      <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-neutral-100 text-[11px] font-bold text-neutral-500 group-hover:bg-white/20 group-hover:text-white">
+                        {i + 1}
+                      </span>
+                      <div className="min-w-0 flex-1">
+                        <div className="truncate text-[13px] font-semibold text-neutral-900 group-hover:text-white">
+                          {song.title}
+                        </div>
+                        {song.artist && (
+                          <div className="text-[10px] text-neutral-400 group-hover:text-white/60">
+                            {song.artist}
+                          </div>
+                        )}
+                      </div>
+                      <span className="shrink-0 rounded-md bg-neutral-100 px-1.5 py-0.5 text-[10px] font-bold text-neutral-500 group-hover:bg-white/20 group-hover:text-white/80">
+                        {song.originalKey}
+                      </span>
+                    </button>
+                  ))}
+                </div>
               </div>
 
-              {/* Feature cards */}
-              <div className="mt-12 grid grid-cols-2 gap-4">
-                {/* 악보 보기 */}
+              {/* Feature cards — 3개 같은 라인 */}
+              <div className="mt-10 grid grid-cols-3 gap-3">
                 <FeatureCard
                   icon={<SearchIcon />}
                   title="악보 보기"
-                  desc="원하는 곡을 검색해 리드시트로 확인하고 키를 자유롭게 바꾸세요"
-                  label="곡 검색하기"
+                  desc="원하는 곡을 검색해 리드시트로 확인하세요"
+                  label="검색하기"
                   variant="light"
                   onClick={() => songs[0] && onSelectSong(songs[0].id)}
                 />
-                {/* 콘티 만들기 */}
                 <FeatureCard
                   icon={<SetlistIcon />}
                   title="콘티 만들기"
-                  desc="여러 곡을 한 장에. 곡 수에 따라 자동으로 크기가 맞춰져요"
+                  desc="여러 곡을 한 장에 자동으로 배치해요"
                   label="콘티 시작"
                   variant="dark"
                   onClick={() => setShowModal(true)}
                 />
+                <FeatureCard
+                  icon={<FolderIcon />}
+                  title="나의 콘티"
+                  desc="이전에 만든 콘티를 불러와 계속 작업하세요"
+                  label="불러오기"
+                  variant="amber"
+                  onClick={() => setActiveSection('mysetlists')}
+                />
               </div>
-
-              {/* 나의 콘티 shortcut */}
-              <button
-                type="button"
-                onClick={() => setActiveSection('mysetlists')}
-                className="mt-6 flex w-full items-center justify-between rounded-2xl border border-neutral-200 bg-white px-5 py-4 text-left transition hover:border-neutral-300 hover:shadow-sm"
-              >
-                <div className="flex items-center gap-3">
-                  <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-50 text-amber-600">
-                    <FolderIcon />
-                  </span>
-                  <div>
-                    <div className="text-[14px] font-bold text-neutral-900">나의 콘티</div>
-                    <div className="text-[12px] text-neutral-500">이전에 만든 콘티를 불러와요</div>
-                  </div>
-                </div>
-                <span className="text-neutral-400">→</span>
-              </button>
             </>
           )}
 
@@ -265,38 +271,43 @@ interface FeatureCardProps {
   title: string;
   desc: string;
   label: string;
-  variant: 'light' | 'dark';
+  variant: 'light' | 'dark' | 'amber';
   onClick: () => void;
 }
 
 function FeatureCard({ icon, title, desc, label, variant, onClick }: FeatureCardProps) {
   const dark = variant === 'dark';
+  const amber = variant === 'amber';
   return (
     <button
       type="button"
       onClick={onClick}
       className={[
-        'group flex flex-col items-start gap-4 rounded-2xl border p-6 text-left transition-all duration-200',
-        dark
-          ? 'border-neutral-900 bg-neutral-900 text-white hover:bg-neutral-800'
-          : 'border-neutral-200 bg-white text-neutral-900 hover:border-neutral-300 hover:shadow-[0_8px_32px_-8px_rgba(0,0,0,0.10)]',
+        'group flex flex-col items-start gap-3 rounded-2xl border p-5 text-left transition-all duration-200',
+        dark  ? 'border-neutral-900 bg-neutral-900 text-white hover:bg-neutral-800' :
+        amber ? 'border-amber-200 bg-amber-50 text-neutral-900 hover:border-amber-300 hover:bg-amber-100' :
+                'border-neutral-200 bg-white text-neutral-900 hover:border-neutral-300 hover:shadow-[0_8px_32px_-8px_rgba(0,0,0,0.10)]',
       ].join(' ')}
     >
       <div className={[
-        'flex h-11 w-11 items-center justify-center rounded-xl',
-        dark ? 'bg-white/10 text-indigo-300' : 'bg-indigo-50 text-indigo-600',
+        'flex h-10 w-10 items-center justify-center rounded-xl',
+        dark  ? 'bg-white/10 text-indigo-300' :
+        amber ? 'bg-amber-100 text-amber-600' :
+                'bg-indigo-50 text-indigo-600',
       ].join(' ')}>
         {icon}
       </div>
       <div className="flex-1">
-        <div className="text-[17px] font-bold tracking-tight">{title}</div>
-        <p className={['mt-1.5 text-sm leading-relaxed', dark ? 'text-neutral-400' : 'text-neutral-500'].join(' ')}>
+        <div className="text-[15px] font-bold tracking-tight">{title}</div>
+        <p className={['mt-1 text-[12px] leading-relaxed', dark ? 'text-neutral-400' : 'text-neutral-500'].join(' ')}>
           {desc}
         </p>
       </div>
       <div className={[
-        'flex items-center gap-1.5 text-sm font-semibold',
-        dark ? 'text-indigo-300' : 'text-indigo-600',
+        'flex items-center gap-1.5 text-[13px] font-semibold',
+        dark  ? 'text-indigo-300' :
+        amber ? 'text-amber-700' :
+                'text-indigo-600',
       ].join(' ')}>
         {label} →
       </div>
