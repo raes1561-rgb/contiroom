@@ -465,6 +465,44 @@ const s9_chorusB: Line = {
 };
 
 
+/* ========== 부르신 곳에서 (E major) ========== */
+
+
+const s10_intro: Line = {
+  id: 's10-intro-l1',
+  chords: chordsPerMeasure(['E', 'Esus4', 'Emaj7', 'D/E']),
+  melodyNotes: quarterNotes([null, 'G#3', 'A3', 'B3', 'F#4', 'E4', 'E4', 'B3', 'B3', null, 'G#3', 'A3', 'B3', 'B3', 'F#4', 'E4', 'G#4', 'G#4', 'G#4', 'A4']),
+  lyrics: ['따', '스', '한', '성', '령', '', '님', '', '마', '음', '으', '', '로', '보', '네', '', '내', '몸'],
+};
+
+const s10_verse: Line = {
+  id: 's10-verse-l1',
+  chords: chordsPerMeasure(['Amaj7', 'G#m7', 'C#m7', 'F#m7', 'A/B', 'E', 'D/E']),
+  melodyNotes: quarterNotes(['B4', 'B4', 'E4', 'E4', 'E4', null, 'B3', 'B3', 'F#4', 'E4', 'D#4', 'D#4', 'B3', 'E4', 'E4', null, 'C#4', 'D#4', 'E4', 'E4', 'F#4', 'C#4', 'D#4', 'E4', null, 'B3', 'B3', 'G#4', 'A4', 'B4', 'B4']),
+  lyrics: ['을', '감', '싸', '며', '', '주', '어', '지', '는', '평', '', '안', '함', '', '만', '족', '함', '', '을', '느', '끼', '네', '부', '르', '신', '곳', '에', '서'],
+};
+
+const s10_chorus: Line = {
+  id: 's10-chorus-l1',
+  chords: chordsPerMeasure(['Amaj7', 'G#m7', 'C#m7', 'F#m7', 'A/B', 'E', 'Amaj7', 'G#m7', 'C#m7', 'F#m7', 'A/B', 'E']),
+  melodyNotes: quarterNotes(['B4', null, 'B3', 'B3', 'G#4', 'A4', 'B4', 'B4', 'B4', null, 'B3', 'B3', 'G#4', 'A4', 'B4', 'A4', 'A4', null, 'A4', 'G#4', 'A4', 'B4', 'F#4', 'G#4', 'G#4', null, 'B3', 'B3', 'G#4', 'A4', 'B4', 'B4', 'B4', null, 'B3', 'B3', 'G#4', 'A4', 'B4', 'B4', 'B4', null, 'B3', 'B3', 'G#4', 'A4', 'B4', 'A4', 'A4', 'G#4', 'E4', null, 'G#4', 'F#4', 'E4', 'E4', 'E4', null]),
+  lyrics: ['', '나', '는', '예', '배', '하', '네', '', '어', '떤', '상', '황', '에', '도', '', '나', '는', '예', '배', '하', '네', '', '부', '르', '신', '곳', '에', '서', '', '나', '는', '예', '배', '하', '네', '', '어', '떤', '상', '황', '에', '도', '', '나', '는', '예', '배', '하', '네', ''],
+};
+
+const s10_bridge: Line = {
+  id: 's10-bridge-l1',
+  chords: chordsPerMeasure(['Amaj7', 'B/A', 'G#m7', 'C#m7', 'F#m7', 'A/B', 'E', 'E7']),
+  melodyNotes: quarterNotes(['E4', 'E4', 'C#5', 'C#5', 'C#5', 'C#5', 'C#5', 'C#5', 'C#5', 'F#4', 'G#4', 'G#4', 'A4', 'B4', 'B4', 'B4', 'B4', 'B4', 'B4', 'B4', 'E4', 'F#4', 'F#4', 'G#4', 'C#4', 'G#4', 'A4', 'A4', 'A4', null, 'G#4', 'F#4', 'F#4', 'B4', 'G#4', 'G#4', null]),
+  lyrics: ['내', '가', '걸', '어', '갈', '', '때', '길', '', '이', '되', '', '고', '살', '아', '갈', '', '때', '삶', '', '이', '되', '', '는', '그', '곳', '에', '서', '', '예', '배', '', '하', '네', ''],
+};
+
+const s10_chorus2: Line = {
+  id: 's10-chorus2-l1',
+  chords: chordsPerMeasure(['Amaj7', 'B/A', 'G#m7', 'C#m7', 'D', 'B', 'D/E']),
+  melodyNotes: quarterNotes(['E4', 'E4', 'C#5', 'C#5', 'C#5', 'C#5', 'C#5', 'C#5', 'C#5', 'F#4', 'G#4', 'G#4', 'A4', 'B4', 'B4', 'B4', 'B4', 'B4', 'B4', 'B4', 'E4', 'F#4', 'F#4', 'G#4', 'G#4', 'G#4', 'A4', 'A4', 'A4', null, 'G#4', 'A4', 'A4', 'B4', 'B4', 'B4', 'B3', 'B3', 'G#4', 'A4', 'B4', 'B4']),
+  lyrics: ['내', '가', '걸', '어', '갈', '', '때', '길', '', '이', '되', '', '고', '살', '아', '갈', '', '때', '삶', '', '이', '되', '', '는', '그', '곳', '에', '서', '', '예', '배', '', '하', '네', '', '부', '르', '신', '곳', '에', '서'],
+};
+
 export const SAMPLE_SONGS: Song[] = [
   {
     id: 'song-1',
@@ -641,6 +679,26 @@ export const SAMPLE_SONGS: Song[] = [
       { id: 's9-chorus',  type: 'chorus', label: 'Chorus',  lines: [s9_chorusA, s9_chorusB] },
       { id: 's9-verse2',  type: 'verse',  label: 'Verse 2', lines: [s9_verseA, s9_verseB] },
       { id: 's9-chorus2', type: 'chorus', label: 'Chorus',  lines: [s9_chorusA, s9_chorusB] },
+    ],
+  },
+
+  {
+    id: 'song-10',
+    title: '부르신 곳에서',
+    artist: 'Woo',
+    originalKey: 'E',
+    currentKey: 'E',
+    bpm: 75,
+    timeSignature: { numerator: 4, denominator: 4 },
+    form: 'Intro – Verse – Chorus – Bridge – Chorus',
+    rightsStatus: 'original',
+    tags: ['예배', '부르심', 'worship'],
+    sections: [
+      { id: 's10-intro',   type: 'intro',   label: 'Intro',   lines: [s10_intro] },
+      { id: 's10-verse',   type: 'verse',   label: 'Verse',   lines: [s10_verse] },
+      { id: 's10-chorus',  type: 'chorus',  label: 'Chorus',  lines: [s10_chorus] },
+      { id: 's10-bridge',  type: 'bridge',  label: 'Bridge',  lines: [s10_bridge] },
+      { id: 's10-chorus2', type: 'chorus',  label: 'Chorus',  lines: [s10_chorus2] },
     ],
   },
 ];
