@@ -648,6 +648,3 @@ export const SAMPLE_SONGS: Song[] = [
 export function getSongById(id: string): Song | undefined {
   return SAMPLE_SONGS.find((s) => s.id === id);
 }
-export function getSongById(id: string): Song | undefined {
-  return SAMPLE_SONGS.find((s) => s.id === id);
-}
