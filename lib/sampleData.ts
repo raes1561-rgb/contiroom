@@ -395,8 +395,257 @@ export const SAMPLE_SONGS: Song[] = [
       { id: 's6-outro',   type: 'outro',  label: 'Outro',   lines: [s6_outro] },
     ],
   },
+  ,
+  // ── 더 원합니다 ──────────────────────────────────────────────────────
+  {
+    id: 'song-7',
+    title: '더 원합니다',
+    artist: 'Jworship',
+    originalKey: 'G',
+    currentKey: 'G',
+    bpm: 76,
+    timeSignature: { numerator: 4, denominator: 4 },
+    form: 'Intro – Verse – Chorus – Verse – Chorus',
+    rightsStatus: 'original',
+    tags: ['경배', '예수', 'jworship'],
+    sections: [
+      { id: 's7-intro',   type: 'intro',  label: 'Intro',   lines: [s7_intro] },
+      { id: 's7-verse',   type: 'verse',  label: 'Verse',   lines: [s7_verseA, s7_verseB] },
+      { id: 's7-chorus',  type: 'chorus', label: 'Chorus',  lines: [s7_chorusA, s7_chorusB] },
+      { id: 's7-verse2',  type: 'verse',  label: 'Verse 2', lines: [s7_verseA, s7_verseB] },
+      { id: 's7-chorus2', type: 'chorus', label: 'Chorus',  lines: [s7_chorusA, s7_chorusB] },
+    ],
+  },
+  // ── 나는 예배자입니다 ─────────────────────────────────────────────────
+  {
+    id: 'song-8',
+    title: '나는 예배자입니다',
+    artist: '전종혁',
+    originalKey: 'F',
+    currentKey: 'F',
+    bpm: 74,
+    timeSignature: { numerator: 4, denominator: 4 },
+    form: 'Intro – Verse – Chorus – Verse – Chorus',
+    rightsStatus: 'original',
+    tags: ['예배', '헌신', 'worship'],
+    sections: [
+      { id: 's8-intro',   type: 'intro',  label: 'Intro',   lines: [s8_intro] },
+      { id: 's8-verse',   type: 'verse',  label: 'Verse',   lines: [s8_verseA, s8_verseB] },
+      { id: 's8-chorus',  type: 'chorus', label: 'Chorus',  lines: [s8_chorusA, s8_chorusB] },
+      { id: 's8-verse2',  type: 'verse',  label: 'Verse 2', lines: [s8_verseA, s8_verseB] },
+      { id: 's8-chorus2', type: 'chorus', label: 'Chorus',  lines: [s8_chorusA, s8_chorusB] },
+    ],
+  },
+  // ── 나를 지으신 주님 ──────────────────────────────────────────────────
+  {
+    id: 'song-9',
+    title: '나를 지으신 주님',
+    artist: 'Tommy Walker',
+    originalKey: 'E',
+    currentKey: 'E',
+    bpm: 80,
+    timeSignature: { numerator: 4, denominator: 4 },
+    form: 'Intro – Verse – Chorus – Verse – Chorus',
+    rightsStatus: 'original',
+    tags: ['찬양', '신실', 'tommy walker'],
+    sections: [
+      { id: 's9-intro',   type: 'intro',  label: 'Intro',   lines: [s9_intro] },
+      { id: 's9-verse',   type: 'verse',  label: 'Verse',   lines: [s9_verseA, s9_verseB] },
+      { id: 's9-chorus',  type: 'chorus', label: 'Chorus',  lines: [s9_chorusA, s9_chorusB] },
+      { id: 's9-verse2',  type: 'verse',  label: 'Verse 2', lines: [s9_verseA, s9_verseB] },
+      { id: 's9-chorus2', type: 'chorus', label: 'Chorus',  lines: [s9_chorusA, s9_chorusB] },
+    ],
+  },
 ];
 
 export function getSongById(id: string): Song | undefined {
   return SAMPLE_SONGS.find((s) => s.id === id);
 }
+
+// =====================================================================
+// 추가 실제 찬양곡 3곡
+// =====================================================================
+
+/* ========== 더 원합니다 (G major) — Jworship 3 ========== */
+
+// Intro: G  D/G  G/B  C  G/B  Am7  C/D  D7
+const s7_intro: Line = {
+  id: 's7-intro-l1',
+  chords: chordsPerMeasure(['G', 'D/G', 'G/B', 'C', 'G/B', 'Am7', 'C/D', 'D7']),
+  melodyNotes: quarterNotes([null,null,null,null, null,null,null,null, null,null,null,null, null,null,null,null,
+                              null,null,null,null, null,null,null,null, null,null,null,null, null,null,null,null]),
+  lyrics: Array(32).fill(''),
+};
+
+// Verse A: 예수 사랑합니다 사랑합니다 온 마음다하여
+// G  D/F#  Em7  G/D  C  G/B  Am7  C/D D7
+const s7_verseA: Line = {
+  id: 's7-verse-l1',
+  chords: chordsPerMeasure(['G', 'D/F#', 'Em7', 'G/D', 'C', 'G/B', 'Am7', 'C/D']),
+  melodyNotes: quarterNotes([
+    'B4','B4','A4','G4',  'F#4','A4','G4','E4',  'G4','G4','F#4','E4',  'D4','E4','D4',null,
+    'E4','G4','A4','B4',  'A4','G4','E4','G4',    'A4','B4','C5','B4',  'A4','G4',null,null,
+  ]),
+  lyrics: ['예','수','사','랑','합','니','다','사','랑','합','니','다','온','마','음','다','하','여'],
+};
+
+// Verse B: 오직 주님한분만 간절히더원합니다
+// G  D/F#  Em7  G/D  C  D  | G  C/D D7
+const s7_verseB: Line = {
+  id: 's7-verse-l2',
+  chords: chordsPerMeasure(['G', 'D/F#', 'Em7', 'G/D', 'C', 'D', 'G', 'C/D']),
+  melodyNotes: quarterNotes([
+    'B4','B4','A4','G4',  'F#4','A4','G4','E4',  'G4','G4','F#4','E4',  'D4','E4','D4',null,
+    'E4','G4','A4','B4',  'A4','B4','C5',null,    'B4','A4','G4',null,   null,null,null,null,
+  ]),
+  lyrics: ['오','직','주','님','한','분','만','간','절','히','더','원','합','니','다'],
+};
+
+// Chorus A: 넘쳐나네 넘쳐나네 주를향한 내속에 갈망이
+// G  G/B  C  G/B  Am7  D
+const s7_chorusA: Line = {
+  id: 's7-chorus-l1',
+  chords: chordsPerMeasure(['G', 'G/B', 'C', 'G/B', 'Am7', 'D']),
+  melodyNotes: quarterNotes([
+    'D5','D5','D5',null,  'D5','C5','B4',null,  'C5','C5','C5',null,
+    'B4','C5','B4',null,  'A4','B4','C5','B4',  'A4','G4',null,null,
+  ]),
+  lyrics: ['넘','쳐','나','네','넘','쳐','나','네','주','를','향','한','내','속','에','갈','망','이'],
+};
+
+// Chorus B: 주님께로 날이끌어 주소서 주님을더원합니다
+// G  G/B  C  Bm7  Em7  Am7  D7  G
+const s7_chorusB: Line = {
+  id: 's7-chorus-l2',
+  chords: chordsPerMeasure(['G', 'G/B', 'C', 'Bm7', 'Em7', 'Am7', 'D7', 'G']),
+  melodyNotes: quarterNotes([
+    'D5','C5','B4',null,  'B4','A4','G4',null,  'A4','G4','A4','B4',  'C5','B4',null,null,
+    'B4','A4','G4',null,  'A4','B4','C5',null,   'B4','A4','G4',null,  null,null,null,null,
+  ]),
+  lyrics: ['주','님','께','로','날','이','끌','어','주','소','서','주','님','을','더','원','합','니','다'],
+};
+
+/* ========== 나는 예배자입니다 (F major) — 전종혁 ========== */
+
+// Intro: F  C/E  Bb/D  F/C  Bb  C  Dm  C(sus4)
+const s8_intro: Line = {
+  id: 's8-intro-l1',
+  chords: chordsPerMeasure(['F', 'C/E', 'Bb/D', 'F/C', 'Bb', 'C', 'Dm', 'Csus4']),
+  melodyNotes: quarterNotes([
+    'F4','G4','A4','C5',  'E4','G4','A4',null,  'D4','F4','G4','A4',  'C4','F4',null,null,
+    'Bb3','D4','F4',null, 'C4','E4','G4',null,   'D4','F4','A4',null,  null,null,null,null,
+  ]),
+  lyrics: Array(32).fill(''),
+};
+
+// Verse A: 나는 하나님을 예배하는 예배자입니다
+// F  C/E  Bb/D  F/C  Bb  C  Dm  C(sus4)
+const s8_verseA: Line = {
+  id: 's8-verse-l1',
+  chords: chordsPerMeasure(['F', 'C/E', 'Bb/D', 'F/C', 'Bb', 'C', 'Dm', 'Csus4']),
+  melodyNotes: quarterNotes([
+    'F4','F4','G4','A4',  'G4','A4','C5',null,  'Bb4','A4','G4','F4', 'G4','F4',null,null,
+    'Bb4','Bb4','C5',null,'C5','Bb4','A4',null,  'G4','A4','Bb4',null, null,null,null,null,
+  ]),
+  lyrics: ['나','는','하','나','님','을','예','배','하','는','예','배','자','입','니','다'],
+};
+
+// Verse B: 내가서있는곳 어디서나 하나님을예배합니다 내영혼
+// F  C/E  Bb/D  F/C  Bb  Dm7  G/B C(sus4) Am7
+const s8_verseB: Line = {
+  id: 's8-verse-l2',
+  chords: chordsPerMeasure(['F', 'C/E', 'Bb/D', 'F/C', 'Bb', 'Dm7', 'G/B', 'Csus4']),
+  melodyNotes: quarterNotes([
+    'F4','F4','G4','A4',  'G4','A4','C5',null,  'Bb4','A4','G4','F4', 'G4','F4',null,null,
+    'Bb4','C5','D5',null, 'C5','Bb4','A4',null,  'G4','A4','Bb4',null, 'C5',null,null,null,
+  ]),
+  lyrics: ['내','가','서','있','는','곳','어','디','서','나','하','나','님','을','예','배','합','니','다','내','영','혼'],
+};
+
+// Chorus A: 거룩한 은혜를 향하여 내마음 완전한 하나님향하여 이곳
+// Bb  C  Dm  F/A  Bb  C  F  F/A
+const s8_chorusA: Line = {
+  id: 's8-chorus-l1',
+  chords: chordsPerMeasure(['Bb', 'C', 'Dm', 'F/A', 'Bb', 'C', 'F', 'F/A']),
+  melodyNotes: quarterNotes([
+    'D5','C5','Bb4',null, 'C5','Bb4','A4',null,  'F4','G4','A4','Bb4', 'C5',null,null,null,
+    'D5','C5','Bb4',null, 'C5','D5','C5',null,    'A4','Bb4','C5',null,  null,null,null,null,
+  ]),
+  lyrics: ['거','룩','한','은','혜','를','향','하','여','내','마','음','완','전','한','하','나','님','향','하','여','이','곳'],
+};
+
+// Chorus B: 에서 바로이시간 하나님을 예배합니다
+// Bb  F/A  Dm7  Gm7  C(sus4)  F
+const s8_chorusB: Line = {
+  id: 's8-chorus-l2',
+  chords: chordsPerMeasure(['Bb', 'F/A', 'Dm7', 'Gm7', 'Csus4', 'F']),
+  melodyNotes: quarterNotes([
+    'D5',null,'C5','Bb4', 'A4','Bb4','C5',null,  'D5','C5','Bb4',null,  'C5','Bb4','A4',null,
+    'G4','A4','Bb4',null,  null,null,null,null,   null,null,null,null,   null,null,null,null,
+  ]),
+  lyrics: ['에','서','바','로','이','시','간','하','나','님','을','예','배','합','니','다'],
+};
+
+/* ========== 나를 지으신 주님 (E major) — Tommy Walker ========== */
+
+// Intro: E  F#m7  E/G#  A  E/B  Bsus4  B7  A/B
+const s9_intro: Line = {
+  id: 's9-intro-l1',
+  chords: chordsPerMeasure(['E', 'F#m7', 'E/G#', 'A', 'E/B', 'Bsus4', 'B7', 'A/B']),
+  melodyNotes: quarterNotes([
+    null,null,null,null,  null,null,null,null,  null,null,null,null,  null,null,null,null,
+    null,null,null,null,  null,null,null,null,  null,null,null,null,  null,null,null,null,
+  ]),
+  lyrics: Array(32).fill(''),
+};
+
+// Verse A: 나를 지으신주님 내안에게셔
+//          그는 내아버저  난 그의소유
+// E  F#m7  E/G#  A  E/B  Bsus4  B7  A/B
+const s9_verseA: Line = {
+  id: 's9-verse-l1',
+  chords: chordsPerMeasure(['E', 'F#m7', 'E/G#', 'A', 'E/B', 'Bsus4', 'B7', 'A/B']),
+  melodyNotes: quarterNotes([
+    'E4','F#4','G#4',null, 'A4','G#4','F#4',null, 'E4','F#4','G#4','A4', 'B4',null,null,null,
+    'E4','F#4','G#4',null, 'A4','G#4','F#4',null,  'E4','D#4','C#4',null,  null,null,null,null,
+  ]),
+  lyrics: ['나','를','지','으','신','주','님','내','안','에','게','셔'],
+};
+
+// Verse B: 처음부터 내삶은 그 의존에있었죠
+//          내가어딜 가든지 날 떠나지않죠
+// E  F#m7  E/G#  A  E  B  E  F#m7 E/G#
+const s9_verseB: Line = {
+  id: 's9-verse-l2',
+  chords: chordsPerMeasure(['E', 'F#m7', 'E/G#', 'A', 'E', 'B', 'E', 'F#m7']),
+  melodyNotes: quarterNotes([
+    'E4','F#4','G#4',null, 'A4','G#4','F#4',null, 'E4','F#4','G#4','A4', 'B4',null,null,null,
+    'E4','F#4','E4',null,   'D#4','C#4','B3',null,  'E4',null,null,null,   null,null,null,null,
+  ]),
+  lyrics: ['처','음','부','터','내','삶','은','그','의','존','에','있','었','죠'],
+};
+
+// Chorus A: 내이름아시죠 내모든생각도
+// A  E  B  E  A  E  B  E
+const s9_chorusA: Line = {
+  id: 's9-chorus-l1',
+  chords: chordsPerMeasure(['A', 'E', 'B', 'E', 'A', 'E', 'B', 'E']),
+  melodyNotes: quarterNotes([
+    'A4','B4','C#5',null,  'B4','A4','G#4',null,  'F#4','G#4','A4',null,  'E4',null,null,null,
+    'A4','B4','C#5',null,  'B4','A4','G#4',null,  'F#4','G#4','A4',null,  'E4',null,null,null,
+  ]),
+  lyrics: ['내','이','름','아','시','죠','내','모','든','생','각','도'],
+};
+
+// Chorus B: 내흐르는눈물 그가닥아주셨죠 / 아바라부를때 그가들으시죠
+// A  E  B  C#m  A  B  E  A/E
+const s9_chorusB: Line = {
+  id: 's9-chorus-l2',
+  chords: chordsPerMeasure(['A', 'E', 'B', 'C#m', 'A', 'B', 'E', 'A/E']),
+  melodyNotes: quarterNotes([
+    'A4','B4','C#5',null,  'B4','A4','G#4',null,  'F#4','G#4','A4','B4',  'C#5',null,null,null,
+    'A4','B4','C#5',null,  'B4','A4','G#4',null,  'E4',null,null,null,     null,null,null,null,
+  ]),
+  lyrics: ['내','흐','르','는','눈','물','그','가','닥','아','주','셨','죠','아','바','라','부','를','때','그','가','들','으','시','죠'],
+};
+
